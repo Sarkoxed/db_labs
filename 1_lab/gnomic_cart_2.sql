@@ -1,63 +1,59 @@
 CREATE TABLE games (
-	id int,
-	title text,
-	release_date int,
-	genre_id int,
-	platform_id int
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	title TEXT NOT NULL UNIQUE,
+	release_date INTEGER NOT NULL,
+	genre_id INTEGER NOT NULL,
+	platform_id INTEGER NOT NULL,
 );
 
 CREATE TABLE players (
-	id int,
-	username text
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	username TEXT NOT NULL,
 );
 
 CREATE TABLE developers (
-	id int,
-	name text,
-	office_room_id int
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL,
+	office_room_id INTEGER NOT NULL,
 );
 
 CREATE TABLE officerooms (
-	id int,
-	room_name text
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	room_name TEXT NOT NULL UNIQUE,
 );
 
 CREATE TABLE sales (
-	id int,
-	game_id int,
-	player_id int,
-	sale_date int,
-	price int
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	game_id INTEGER NOT NULL,
+    FOREIGN KEY(game_id) REFERENCES games(id),
+	player_id INTEGER NOT NULL,
+    FOREIGN KEY(player_id) REFERENCES players(id),
+	sale_date INTEGER NOT NULL,
+	price INTEGER NOT NULL,
 );
 
 CREATE TABLE genres (
-	id int,
-	name text
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL,
 );
 
 CREATE TABLE platforms (
-	id int,
-	name text
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL,
 );
 
 CREATE TABLE ratings (
-	id int,
-	game_id int,
-	player_id int,
-	rating int
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	game_id INTEGER NOT NULL,
+    FOREIGN KEY(game_id) REFERENCES games(id),
+	player_id INTEGER NOT NULL,
+    FOREIGN KEY(player_id) REFERENCES players(id),
+	rating INTEGER NOT NULL
 );
 
 CREATE TABLE developed_by (
-	developer_id int,
-	game_id int
+	developer_id INTEGER NOT NULL,
+	game_id INTEGER NOT NULL,
+    FOREIGN KEY(developer_id) REFERENCES developers(id),
+    FOREIGN KEY(game_id) REFERENCES games(id),
 );
-
-
-
-
-
-
-
-
-
-
